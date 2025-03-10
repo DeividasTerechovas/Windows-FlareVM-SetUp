@@ -4,6 +4,15 @@
 
 This project focuses on setting up a Windows 10 virtual machine and configuring Flare-VM, a security-focused distribution for malware analysis and reverse engineering. The guide walks through installation, configuration, and security optimizations.
 
+| Reverse Engineering & Malwayre Analysis Project                                      | Detailed Repo        |
+|-----------------------------------------------|----------------------------|
+| Coming Soon         | Coming Soon|
+| Coming Soon  | Coming Soon|
+| Coming Soon         | Coming Soon  |
+| Coming Soon        | Coming Soon  |
+| Coming Soon                   | Coming Soon  |
+| Coming Soon   |Coming Soon  |
+
 # Skills Learned
 
 Virtual Machine (VM) configuration and optimization.
