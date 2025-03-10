@@ -41,22 +41,24 @@ Start the VM installation.
 
 <img src="https://i.imgur.com/t3GH2xU.jpeg" width="500">
 
+Select the VM driver and begin installation.
+
 <img src="https://i.imgur.com/XFI2vgK.jpeg" width="500">
 
 CHECK THE FLARE-VM WEBSITE FOR FLARE REQUIREMENT!
 4GM RAM, 2 CPU CORES & 60GB STORAGE IS MINIMUM
 
-Select the language, then proceed with the installation.
-
 Change the network from NAT to HOST-only.
 
-Select I do not have a key.
+<img src="https://i.imgur.com/SGWVWdH.png" width="500">
 
 Choose Windows 10 Home.
 
-Select Custom: Install Windows Only.
+Select the language, then proceed with the installation.
 
-Select the VM driver and begin installation.
+Select I do not have a key.
+
+Select Custom: Install Windows Only.
 
 # 2. Pre-Installation Configurations
 
@@ -78,9 +80,13 @@ Open Run (Windows+R), type services.msc.
 
 Find Windows Update, double-click it.
 
+<img src="https://i.imgur.com/gRYLyRG.jpeg" width="500">
+
 Set Startup Type to Disabled.
 
 Click Stop under Service status.
+
+<img src="https://i.imgur.com/2ZIJCA6.jpeg" width="500">
 
 # 4. Disabling Windows Defender
 
@@ -161,7 +167,7 @@ Choose which Flare-VM tools to install (or select all).
 
 Let the installation run (take a break, grab some tea!).
 
-Why This Matters
+# Why This Matters
 
 Sets up a fully optimized malware analysis VM.
 
