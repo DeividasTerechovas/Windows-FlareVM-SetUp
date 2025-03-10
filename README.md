@@ -39,6 +39,13 @@ Windows 10 – Operating system for the VM.
 
 Start the VM installation.
 
+<img src="https://i.imgur.com/t3GH2xU.jpeg" width="500">
+
+<img src="https://i.imgur.com/XFI2vgK.jpeg" width="500">
+
+CHECK THE FLARE-VM WEBSITE FOR FLARE REQUIREMENT!
+4GM RAM, 2 CPU CORES & 60GB STORAGE IS MINIMUM
+
 Select the language, then proceed with the installation.
 
 Change the network from NAT to HOST-only.
@@ -86,6 +93,7 @@ Extra Step: Prevent Defender from turning on after restart.
 If gpedit.msc is missing, open CMD as Admin and run:
 
 FOR %F IN ("%SystemRoot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~*.mum") DO (DISM /Online /NoRestart /Add-Package:"%F")
+
 FOR %F IN ("%SystemRoot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~*.mum") DO (DISM /Online /NoRestart /Add-Package:"%F")
 
 Open gpedit.msc (Windows+R → gpedit.msc).
@@ -161,6 +169,4 @@ Provides hands-on experience with security tools.
 
 Prepares an environment for reverse engineering and threat research.
 
-Screenshots & References
 
-Coming Soon: Baseline and Installation Screenshots.
