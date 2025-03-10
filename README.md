@@ -1,119 +1,102 @@
-# Windows-FlareVM-SetUp
+# Reverse Engineering & Malware Analysis Lab
 
-Flare-VM Installation and Configuration Guide
+# Objective
 
-Objective
+This project focuses on setting up a Windows 10 virtual machine and configuring Flare-VM, a security-focused distribution for malware analysis and reverse engineering. The guide walks through installation, configuration, and security optimizations.
 
-The goal of this project is to set up a Windows 10 virtual machine with Flare-VM, a Windows-based security distribution designed for malware analysis, incident response, and penetration testing.
+# Skills Learned
 
-Skills Learned
+Virtual Machine (VM) configuration and optimization.
 
-Setting up and configuring a virtual machine.
+Disabling Windows security features for malware analysis.
 
-Disabling Windows Defender and Windows Updates for forensic analysis.
+Installing and configuring Flare-VM.
 
-Installing Flare-VM and essential security tools.
+Handling Windows Defender and Windows Update settings.
 
-Managing PowerShell execution policies and installation scripts.
+# Tools Used
 
-Tools Used
+Flare-VM – Security-focused VM setup.
 
-VirtualBox/VMware – For setting up the virtual environment.
+VirtualBox/VMware – Virtualization platforms.
 
-Windows 10 ISO – The OS for the virtual machine.
+Windows 10 – Operating system for the VM.
 
-Flare-VM – A collection of forensic and malware analysis tools.
+# Steps
 
-Windows Registry & Group Policy Editor – For disabling security features.
+# 1. Setting Up the Windows 10 VM
 
-Steps
+Start the VM installation.
 
-1. Setting Up the Virtual Machine
+Select the language, then proceed with the installation.
 
-Download the Windows 10 ISO.
+Change the network from NAT to HOST-only.
 
-Create a new VM in VirtualBox/VMware.
+Select I do not have a key.
 
-Configure the VM:
+Choose Windows 10 Home.
 
-Allocate sufficient RAM and CPU.
+Select Custom: Install Windows Only.
 
-Create a virtual hard drive.
+Select the VM driver and begin installation.
 
-Mount the Windows 10 ISO.
+# 2. Pre-Installation Configurations
 
-Start the VM and install Windows 10:
+Ensure Flare-VM requirements are met.
 
-Select Language, then Next.
+Swap network back from HOST-only to NAT.
 
-Choose Install Now.
+Install Guest Additions for easier copy-paste and file dragging.
 
-Swap network from NAT to HOST-Only.
+VM Toolbar → Devices → Insert Guest Additions CD Image.
 
-Click I do not have a key.
+Open This PC in the VM and run VBoxWindowsAdditions-amd64.
 
-Select Windows 10 Home.
+Follow the installation prompts and restart the VM.
 
-Choose Custom: Install Windows Only.
+# 3. Disabling Windows Updates
 
-Select the VM drive and begin installation.
-
-2. Pre-Installation Configurations
-
-Ensure system requirements are met.
-
-Enable Guest Additions for clipboard sharing and file drag-and-drop:
-
-VM Toolbar > Devices > Insert Guest Additions CD Image.
-
-Open This PC, run VBoxWindowsAdditions-amd64.
-
-Follow installation steps and restart the VM.
-
-3. Disable Windows Updates & Defender
-
-Disable Windows Updates
-
-Press Windows + R, type services.msc.
+Open Run (Windows+R), type services.msc.
 
 Find Windows Update, double-click it.
 
 Set Startup Type to Disabled.
 
-Click Stop under Service Status.
+Click Stop under Service status.
 
-Disable Windows Defender
+# 4. Disabling Windows Defender
 
-Open Windows Security from the search bar.
+Open Windows Security → Virus & Threat Protection → Manage Settings.
 
-Navigate to Virus & Threat Protection > Manage Settings.
+Disable Real-time protection and all other options.
 
-Turn everything OFF.
+Extra Step: Prevent Defender from turning on after restart.
 
-If gpedit.msc is missing, open CMD as administrator and run:
+If gpedit.msc is missing, open CMD as Admin and run:
 
 FOR %F IN ("%SystemRoot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~*.mum") DO (DISM /Online /NoRestart /Add-Package:"%F")
 FOR %F IN ("%SystemRoot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~*.mum") DO (DISM /Online /NoRestart /Add-Package:"%F")
 
-Open Local Group Policy Editor (gpedit.msc):
+Open gpedit.msc (Windows+R → gpedit.msc).
 
-Navigate to Computer Configuration > Administrative Templates > Windows Components > Microsoft Defender Antivirus > Real-time Protection.
+Navigate to:
+
+Computer Configuration > Administrative Templates > Windows Components > Microsoft Defender Antivirus > Real-time Protection
 
 Enable Turn off real-time protection.
 
 Restart the VM.
 
-Alternative Method (Registry Edit)
+# 5. Alternative Defender Disabling (Registry Method)
 
 Boot into Safe Mode.
 
-Press Windows + R, type regedit.
+Open Run (Windows+R), type regedit.
 
 Navigate to:
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Service
 
-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services
-
-Set the Start value to 4 in these folders:
+Change the Start value to 4 for the following keys:
 
 Sense
 
@@ -127,63 +110,46 @@ WdNisSvc
 
 WinDefend
 
-Restart back into normal mode.
+Restart back to normal mode.
 
-4. Taking a Baseline Snapshot
+This method leaves Defender in a loading loop, preventing activation.
 
-Take a screenshot and save it as Baseline Backup.
+# 6. Creating a Baseline Snapshot
 
-This serves as a restore point in case of errors.
+Take a screenshot and save it as BASELINE_BACKUP for reference if anything goes wrong.
 
-5. Installing Flare-VM
+# 7. Installing Flare-VM
 
-Download Flare-VM from Mandiant's GitHub.
+Download Flare-VM installer:
 
-Right-click installer.ps1, choose Save link as, and save it in a folder named Flare on the Desktop.
+Go to Flare-VM GitHub.
 
-Open the Flare folder, go to File > Open Windows PowerShell as Administrator.
+Right-click installer.ps1, save it to a Flare folder on the desktop.
 
-Before running the script, execute:
+Open the Flare folder, then File > Open Windows PowerShell as Administrator.
+
+Run the following:
 
 Unblock-File .\install.ps1
 Set-ExecutionPolicy Unrestricted -Force
-
-Run the installer:
-
 .\install.ps1
 
-Switch network back to HOST-ONLY after installation.
+# 8. Post-Installation Steps
 
-6. Flare-VM Installation GUI
+Swap network from NAT back to HOST-only.
 
-You can choose Install All Files or customize the installation.
+Choose which Flare-VM tools to install (or select all).
 
-Once installation begins, it may take time. Grab some lunch and tea!
+Let the installation run (take a break, grab some tea!).
 
 Why This Matters
 
-Provides hands-on experience with a malware analysis VM setup.
+Sets up a fully optimized malware analysis VM.
 
-Teaches how to configure a secure analysis environment.
+Provides hands-on experience with security tools.
 
-Disables unnecessary security features that may interfere with forensic tasks.
-
-Enables script execution for automated tool installations.
+Prepares an environment for reverse engineering and threat research.
 
 Screenshots & References
 
-Baseline System Image (before installing Flare-VM).
-
-Flare-VM Installer running in PowerShell.
-
-Final installation completed screen.
-
-Additional Resources
-
-Flare-VM GitHub Repo
-
-Microsoft Documentation on Disabling Windows Defender
-
-VirtualBox Guest Additions Guide
-
-This guide ensures a complete and functional setup of Flare-VM for malware analysis and security research.
+Coming Soon: Baseline and Installation Screenshots.
