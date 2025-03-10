@@ -108,9 +108,17 @@ Navigate to:
 
 Computer Configuration > Administrative Templates > Windows Components > Microsoft Defender Antivirus > Real-time Protection
 
+<img src="https://i.imgur.com/t8KWrxC.png" width="500">
+
 Enable Turn off real-time protection.
 
 Restart the VM.
+
+Navigate to:
+
+Computer Configuration > Administrative Templates > Windows Components > Microsoft Defender Antivirus
+
+
 
 # 5. Alternative Defender Disabling (Registry Method)
 
